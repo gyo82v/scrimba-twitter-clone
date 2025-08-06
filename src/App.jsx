@@ -12,7 +12,7 @@ function App() {
   // tailwind styles
     const container = `flex flex-col p-3 w-11/12 items-center mx-auto `
     const title = `text-3xl font-bold text-sky-500 mr-auto`
-    const header = `w-11/12 flex flex-col items-center`
+    const header = `w-11/12 flex flex-col items-center w-full`
     const input = `border border-neutral-800 w-full rounded-lg shadow-lg shadow-neutral-800/30
                    my-5 p-2 bg-neutral-50
                    focus:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-sky-500
@@ -31,8 +31,7 @@ function App() {
       key={t.uuid} 
       like={() => handleLikes(t.uuid)} 
       retweet={() => handleRetweets(t.uuid)}
-      isLiked={t.isLiked}
-      isRetweeted={t.isRetweeted}
+      reply={() => handleReplies(t.uuid)}
     />
   ))
 
@@ -43,6 +42,9 @@ function App() {
   const handleRetweets = uuid => {
     setTweets(t => t.map(
       t => t.uuid === uuid ? {...t, retweets : t.retweets + (t.isRetweeted ? -1 : +1), isRetweeted : !t.isRetweeted} : t))
+  }
+  const handleReplies = uuid => {
+    setTweets(t => t.map(t => t.uuid === uuid ? {...t , isReply : !t.isReply } : t))
   }
 
   const handleChange = e => setText(e.target.value) 
@@ -56,6 +58,7 @@ function App() {
       replies: [],
       isLiked: false,
       isRetweeted: false,
+      isReply: false,
       uuid: nanoid(),
     }])
     setText("")
