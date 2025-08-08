@@ -33,15 +33,21 @@ export default function Tweet({data, like, retweet, reply }){
                 <p className="mb-4 mt-2 font-semibold">{tweetText}</p>
                 <div className="flex gap-3 w-10/12">
                     <span className={btnSection}>
-                        <button onClick={reply} disabled={replies.length < 1}><FaRegCommentDots className={`${icon} ${repliesIcon}`} /></button>
+                        <button onClick={reply} disabled={replies.length < 1} aria-label="manage comments">
+                            <FaRegCommentDots className={`${icon} ${repliesIcon}`} />
+                        </button>
                         <p>{replies.length}</p>
                     </span>
                     <span className={btnSection}>
-                        <button onClick={like}><FaHeart className={`${icon} ${heartIcon}`}/></button>
+                        <button onClick={like} aria-label="Manage likes">
+                            <FaHeart className={`${icon} ${heartIcon}`}/>
+                        </button>
                         <p>{likes}</p>
                     </span>
                     <span className={btnSection}>
-                        <button onClick={retweet}><FaRetweet className={`${icon} ${retweetIcon}`}/></button>
+                        <button onClick={retweet} aria-label="manage retweets">
+                            <FaRetweet className={`${icon} ${retweetIcon}`}/>
+                        </button>
                         <p>{retweets}</p>
                     </span>
                 </div>
